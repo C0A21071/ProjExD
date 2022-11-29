@@ -11,6 +11,10 @@ def button_click(event):
         res = eval(siki)#数式文字列の評価
         entry.delete(0,tk.END)#表示文字列の削除
         entry.insert(tk.END,res)#結果の挿入
+    elif num == "C":
+        entry.delete(0,tk.END)
+
+
     else:#=以外のボタン
 
     #tkm.showinfo("",f"{num}ボタンがクリックされました")
@@ -20,11 +24,11 @@ def button_click(event):
 
 #練習1
 root = tk.Tk()
-root.geometry("400x600")
+root.geometry("500x600")
 
 
 #練習2
-r = 1
+r = 3
 c = 2
 for num in range(9,-1,-1):
     button = tk.Button(root, text = f"{num}",width = 4,height = 2,font=("",30))
@@ -34,23 +38,23 @@ for num in range(9,-1,-1):
     if c == -1:
         r += 1
         c = 2
-    elif num == 0:
-        c = 0
-        r = 4
+    #elif num == 0:
+     #   c = 0
+      #  r = 2
+    
 
 entry = tk.Entry(root,justify = "right", width = 10,font = ("",40 ))
 entry.grid(row=0,column=0,columnspan = 3)
 
 #練習5
-operators = ["+","="]
+operators = ["C","+","*","="]
 for ope in operators:
     button = tk.Button(root, text = f"{ope}",width = 4,height = 2,font=("",30))
+    c = 3
+    r-=1
     button.grid(row = r,column=c)
     button.bind("<1>",button_click)
-    c+=1
-    if c%4 == 0:
-        r = 3
-        c = 5
+    
 
 
 root.mainloop()
