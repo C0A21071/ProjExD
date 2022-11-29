@@ -13,6 +13,8 @@ def button_click(event):
         entry.delete(0,tk.END)
         entry.insert(tk.END,ans)
         keisansiki.insert(tk.END,line)
+    if txt == "C":
+        entry.delete(0,tk.END)
     else:
         entry.insert(tk.END,txt)
     
@@ -35,7 +37,7 @@ root.grid_rowconfigure(1,weight=1)
 bt = ["7","8","9","+",
       "4","5","6","-",
       "1","2","3","*",
-      "0","="]
+      "0","C","="]
 
 r,c = 2,0
 for key in bt:
