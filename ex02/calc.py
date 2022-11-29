@@ -32,13 +32,11 @@ keisansiki.grid(row = 0, column = 0, columnspan=4,sticky = tk.W+tk.E)
 entry=tk.Entry(root,justify="right",width=10,font=("",40))
 entry.grid(row = 1, column = 0 , columnspan=4,sticky=tk.W+tk.E)
 
-#root.grid_rowconfigure(1,weight=1)
-
 #ボタン情報の一括管理
 bt = ["7","8","9","+",
       "4","5","6","-",
       "1","2","3","*",
-      "0","C","="]
+      "0","C","=",]
 
 r,c = 2,0
 for key in bt:
