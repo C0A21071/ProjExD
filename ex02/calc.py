@@ -37,7 +37,7 @@ entry.grid(row = 1, column = 0 , columnspan=4,sticky=tk.W+tk.E)
 bt = ["7","8","9","+",
       "4","5","6","-",
       "1","2","3","*",
-      "0","C","=",]
+      "0","C","=","/"]
 
 r,c = 2,0
 for key in bt:
