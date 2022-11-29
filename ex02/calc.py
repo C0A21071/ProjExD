@@ -13,8 +13,9 @@ def button_click(event):
         entry.delete(0,tk.END)
         entry.insert(tk.END,ans)
         keisansiki.insert(tk.END,line)
-    if txt == "C":
+    elif txt == "C":
         entry.delete(0,tk.END)
+        keisansiki.delete(0,tk.END)
     else:
         entry.insert(tk.END,txt)
     
