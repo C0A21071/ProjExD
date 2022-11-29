@@ -23,11 +23,13 @@ root.title("電卓")
 root.geometry("400x500")
 
 #計算後に計算式を表示する欄
-keisansiki = tk.Entry(root,justify="right",width=40,font=("",10))
-keisansiki.grid(row = 0, column = 0, columnspan=3)
+keisansiki = tk.Entry(root,justify="right",font=("",10))
+keisansiki.grid(row = 0, column = 0, columnspan=4,sticky = tk.W+tk.E)
 #テキスト入力欄
 entry=tk.Entry(root,justify="right",width=10,font=("",40))
-entry.grid(row = 1, column = 0 , columnspan=3)
+entry.grid(row = 1, column = 0 , columnspan=4,sticky=tk.W+tk.E)
+
+root.grid_rowconfigure(1,weight=1)
 
 #ボタン情報の一括管理
 bt = ["7","8","9","+",
@@ -44,7 +46,6 @@ for key in bt:
     if (c%4 == 0):
         r += 1
         c = 0
-
 
 """
 #0-9のボタンと、右端に四則演算のボタンを表示
