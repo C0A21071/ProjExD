@@ -39,6 +39,7 @@ bt = ["7","8","9","+",
       "1","2","3","*",
       "0","C","=","/"]
 
+#ボタンの表示
 r,c = 2,0
 for key in bt:
     button = tk.Button(root,text=f"{key}",width=4,height=2,font=("",30))
