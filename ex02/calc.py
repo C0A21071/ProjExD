@@ -7,7 +7,8 @@ import tkinter.messagebox as tkm
 def button_click(event):
     btn = event.widget
     txt = btn["text"]
-    tkm.showinfo(txt,f"{txt}のボタンがクリックされました")
+    if txt != "=":
+        entry.insert(tk.END,txt)
 
 #ウィンドウ設定
 root = tk.Tk()
@@ -33,10 +34,12 @@ for i in range(9,-1,-1):
 operators = ["+","="]
 for ope in operators:
     button = tk.Button(root,text=f"{ope}",font=("",30),width=4,height=2)
+    button.bind("<1>",button_click)
     button.grid(row=r,column=c)
     c += 1
     if (c%3 == 0):
         r += 1
         c = 0
+
 #実行
 root.mainloop()
