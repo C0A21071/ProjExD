@@ -12,6 +12,7 @@ def button_click(event):
         ans = eval(line)
         entry.delete(0,tk.END)
         entry.insert(tk.END,ans)
+        keisansiki.delete(0,tk.END) #=が溜まり続けるため、それを廃棄する処理
         keisansiki.insert(tk.END,line)
     elif txt == "C":
         entry.delete(0,tk.END)
