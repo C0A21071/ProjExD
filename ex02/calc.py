@@ -7,8 +7,14 @@ import tkinter.messagebox as tkm
 def button_click(event):
     btn = event.widget
     txt = btn["text"]
-    if txt != "=":
+    if txt == "=":
+        line = entry.get()
+        ans = eval(line)
+        entry.delete(0,tk.END)
+        entry.insert(tk.END,ans)
+    else:
         entry.insert(tk.END,txt)
+    
 
 #ウィンドウ設定
 root = tk.Tk()
