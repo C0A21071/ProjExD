@@ -1,14 +1,20 @@
 import tkinter as tk
+from tkinter import ttk
 import tkinter.messagebox as tkm
+
 
 #関数定義
 #ボタンを押した際の反応
 def button_click(event):
+    
+    replace = str.maketrans({"÷":"/","x":"*"}) #変換用テーブルの作成
     btn = event.widget
     txt = btn["text"]
-
+    var.set(entry.get())
     if txt == "=": #=を押したときは式を計算する。
         line = entry.get()
+        for old,new in replace.items():
+            line = line.translate(replace)
         ans = eval(line)
         entry.delete(0,tk.END)
         entry.insert(tk.END,ans)
@@ -26,18 +32,25 @@ root = tk.Tk()
 root.title("電卓")
 root.geometry("400x500")
 
+var = tk.StringVar() #stringvar変数の使用
+
+"""
 #計算後に計算式を表示する欄
-keisansiki = tk.Entry(root,justify="right",font=("",10))
+keisansiki = ttk.Entry(root,justify="right",font=("",10))
 keisansiki.grid(row = 0, column = 0, columnspan=4,sticky = tk.W+tk.E)
+"""
+keisansiki = tk.Label(root,anchor="e", font=("",10),textvariable=var)
+keisansiki.grid(row = 0,column=0, columnspan=4,sticky = tk.W+tk.E)
+
 #テキスト入力欄
-entry=tk.Entry(root,justify="right",width=10,font=("",40))
+entry=ttk.Entry(root,justify="right",width=10,font=("",40))
 entry.grid(row = 1, column = 0 , columnspan=4,sticky=tk.W+tk.E)
 
 #ボタン情報の一括管理
 bt = ["7","8","9","+",
       "4","5","6","-",
-      "1","2","3","*",
-      "0","C","=","/"]
+      "1","2","3","x",
+      "0","C","=","÷"]
 
 #ボタンの表示
 r,c = 2,0
