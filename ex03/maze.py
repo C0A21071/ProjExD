@@ -11,7 +11,7 @@ def key_down(event):
 def key_up(event):
     global key 
     key = ""
-
+    
 def button_click(event):#進むボタンを押した回数を表示する
     btn = event.widget
     txt = btn["text"]
@@ -32,9 +32,11 @@ def main_proc():
     elif key == "Right" and maze_lst[mx+1][my] == 0:#右を押したとき
         mx+=1
         count +=1
-        
+
     cx,cy = mx*100+50,my*100+50
     canvas.coords("tori",cx,cy)
+    if mx == 13 and my == 7:
+
     root.after(100,main_proc)
     print(count)
 
