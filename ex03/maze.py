@@ -17,6 +17,11 @@ def main_proc():
     if key == "Down": my += 1
     if key == "Left": mx -= 1
     if key == "Right": mx += 1
+    if (maze_lst[mx][my] == 1): #移動先が壁なら以下のif分で逆方向に戻す
+        if key == "Up": my += 1
+        if key == "Down": my -= 1
+        if key == "Left": mx += 1
+        if key == "Right": mx -= 1
     cx, cy = (mx*100)+50, (my*100)+50
     canvas.coords("kokaton", cx, cy)
     root.after(100, main_proc)
@@ -29,7 +34,7 @@ if __name__ == "__main__":
     canvas.pack()
 
     maze_lst = mm.make_maze(15, 9)
-    # print(maze_lst)
+    #print(maze_lst)
     mm.show_maze(canvas, maze_lst)
 
     mx,my = 1,1
