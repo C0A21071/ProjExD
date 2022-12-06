@@ -36,8 +36,7 @@ def main_proc():
     cx,cy = mx*100+50,my*100+50
     canvas.coords("tori",cx,cy)
     root.after(100,main_proc)
-
-
+    
 if __name__ =="__main__":
     root = tk.Tk()
     root.title("迷えるこうかとん")
