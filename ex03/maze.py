@@ -20,28 +20,19 @@ def button_click(event):#進むボタンを押した回数を表示する
 
 def main_proc():
     global cx,cy,mx,my,count
-    if key =="Up":#上を押したとき
+    if key =="Up" and maze_lst[mx][my-1] == 0:#上を押したとき
         my-=1
         count +=1
-    elif key == "Down":#下を押したとき
+    elif key == "Down" and maze_lst[mx][my+1] == 0:#下を押したとき
         my+=1
         count +=1
-    elif key == "Left":#左を押したとき
+    elif key == "Left" and maze_lst[mx-1][my] == 0:#左を押したとき
         mx -=1
         count +=1
-    elif key == "Right":#右を押したとき
+    elif key == "Right" and maze_lst[mx+1][my] == 0:#右を押したとき
         mx+=1
         count +=1
-
-    if maze_lst[mx][my] == 1:#移動先が壁の場合
-        if key =="Up":#上を押したとき
-            my+=1
-        elif key == "Down":#下を押したとき
-            my-=1
-        elif key == "Left":#左を押したとき
-            mx +=1
-        elif key == "Right":#右を押したとき
-            mx-=1
+        
     cx,cy = mx*100+50,my*100+50
     canvas.coords("tori",cx,cy)
     root.after(100,main_proc)
