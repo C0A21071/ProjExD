@@ -11,7 +11,7 @@ def key_down(event):
 def key_up(event):
     global key 
     key = ""
-    
+
 def button_click(event):#進むボタンを押した回数を表示する
     btn = event.widget
     txt = btn["text"]
@@ -19,23 +19,29 @@ def button_click(event):#進むボタンを押した回数を表示する
 
 
 def main_proc():
-    global cx,cy,mx,my,count
+    global cx,cy,mx,my,count,tori
     if key =="Up" and maze_lst[mx][my-1] == 0:#上を押したとき
+        tori = tk.PhotoImage(file="fig/6.png")
         my-=1
         count +=1
     elif key == "Down" and maze_lst[mx][my+1] == 0:#下を押したとき
+        tori = tk.PhotoImage(file="fig/4.png")
         my+=1
         count +=1
     elif key == "Left" and maze_lst[mx-1][my] == 0:#左を押したとき
+        tori = tk.PhotoImage(file="fig/5.png")
         mx -=1
         count +=1
     elif key == "Right" and maze_lst[mx+1][my] == 0:#右を押したとき
+        tori = tk.PhotoImage(file="fig/2.png")
         mx+=1
         count +=1
 
     cx,cy = mx*100+50,my*100+50
+    canvas.create_image(cx,cy,image=tori,tag ="tori")
     canvas.coords("tori",cx,cy)
-    if mx == 13 and my == 7:
+    if cx == 13*100+50 and cy == 7*100+50:#右下のマスについたら終了する
+        return
 
     root.after(100,main_proc)
     print(count)
@@ -60,7 +66,8 @@ if __name__ =="__main__":
     tori = tk.PhotoImage(file="fig/1.png")
     canvas.create_image(cx, cy, image=tori,tag = "tori")
     
-    
+    goal = tk.PhotoImage(file = "fig/9.png")
+    canvas.create_image(13*100+50,7*100+50,image=goal,tag ="goal")
     key = ""
     count = 0
 
