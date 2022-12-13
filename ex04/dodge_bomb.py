@@ -14,17 +14,7 @@ def check_bound(obj_rct, scr_rct):
         tate = -1
     return yoko, tate
 
-def mk_bomb(scrn_rct,scrn_sfc):
-    # 練習５
-    bomb_sfc = pg.Surface((20, 20)) # 正方形の空のSurface
-    bomb_sfc.set_colorkey((0, 0, 0))
-    pg.draw.circle(bomb_sfc, (255, 0, 0), (10, 10), 10)
-    bomb_rct = bomb_sfc.get_rect()
-    bomb_rct.centerx = random.randint(0, scrn_rct.width)
-    bomb_rct.centery = random.randint(0, scrn_rct.height)
-    scrn_sfc.blit(bomb_sfc, bomb_rct) 
-    vx, vy = +1, +1
-    return bomb_rct,bomb_sfc,vx,vy
+
 
 #ゲーム自体を関数化
 def nigerokouka():
@@ -44,10 +34,8 @@ def nigerokouka():
     # scrn_sfcにtori_rctに従って，tori_sfcを貼り付ける
     scrn_sfc.blit(tori_sfc, tori_rct) 
 
-    #爆弾生成関数を呼び出す
-    bomb_rct,bomb_sfc,vx,vy = mk_bomb(scrn_rct,scrn_sfc)
-    """
-    # 練習５
+
+    #1つめの爆弾生成 bomb
     bomb_sfc = pg.Surface((20, 20)) # 正方形の空のSurface
     bomb_sfc.set_colorkey((0, 0, 0))
     pg.draw.circle(bomb_sfc, (255, 0, 0), (10, 10), 10)
@@ -55,8 +43,18 @@ def nigerokouka():
     bomb_rct.centerx = random.randint(0, scrn_rct.width)
     bomb_rct.centery = random.randint(0, scrn_rct.height)
     scrn_sfc.blit(bomb_sfc, bomb_rct) 
+
+    #2つめの爆弾生成 bomb2
+    bomb2_sfc = pg.Surface((80, 80)) # 正方形の空のSurface
+    bomb2_sfc.set_colorkey((0, 0, 0))
+    pg.draw.circle(bomb2_sfc, (255, 0, 0), (40, 40), 40)
+    bomb2_rct = bomb2_sfc.get_rect()
+    bomb2_rct.centerx = random.randint(0, scrn_rct.width)
+    bomb2_rct.centery = random.randint(0, scrn_rct.height)
+    scrn_sfc.blit(bomb2_sfc, bomb2_rct) 
+
     vx, vy = +1, +1
-    """
+    dx, dy = +1, +1
     
     # 練習２
     while True:
@@ -87,17 +85,26 @@ def nigerokouka():
                 tori_rct.centerx -= 1            
         scrn_sfc.blit(tori_sfc, tori_rct) 
 
-        # 練習６
+        #爆弾１つ目生成
         bomb_rct.move_ip(vx, vy)
         scrn_sfc.blit(bomb_sfc, bomb_rct) 
         yoko, tate = check_bound(bomb_rct, scrn_rct)
         vx *= yoko
         vy *= tate
 
+        #爆弾２つめ生成
+        bomb2_rct.move_ip(dx, dy)
+        scrn_sfc.blit(bomb2_sfc, bomb2_rct) 
+        yoko2, tate2 = check_bound(bomb2_rct, scrn_rct)
+        dx *= yoko2
+        dy *= tate2
+
         
 
         #練習8
         if tori_rct.colliderect(bomb_rct):
+            return
+        if tori_rct.colliderect(bomb2_rct):
             return
 
         pg.display.update()
