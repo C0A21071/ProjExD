@@ -14,7 +14,7 @@ def check_bound(obj_rct,scrn_rct):
     return yoko,tate
 
 def main():
-    count = 3#こうかとんが爆弾にあたった回数
+    count = 2#こうかとんが爆弾にあたった回数
     clock =pg.time.Clock()
 
     pg.display.set_caption("逃げろ！こうかとん")
@@ -98,6 +98,9 @@ def main():
     
         if count == 0:#爆弾に3回当たったらゲームを終了する
             return
+        elif count == 1:
+            tori_sfc = pg.image.load("fig/0.png")#爆弾に当たったらこうかとんの画像を変更する
+            tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 2.0)
         scrn_sfc.blit(bomb_sfc, bomb_rct)
         
         pg.display.update()
