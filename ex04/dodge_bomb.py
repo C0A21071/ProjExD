@@ -14,6 +14,18 @@ def check_bound(obj_rct, scr_rct):
         tate = -1
     return yoko, tate
 
+def mk_bomb(scrn_rct,scrn_sfc):
+    # 練習５
+    bomb_sfc = pg.Surface((20, 20)) # 正方形の空のSurface
+    bomb_sfc.set_colorkey((0, 0, 0))
+    pg.draw.circle(bomb_sfc, (255, 0, 0), (10, 10), 10)
+    bomb_rct = bomb_sfc.get_rect()
+    bomb_rct.centerx = random.randint(0, scrn_rct.width)
+    bomb_rct.centery = random.randint(0, scrn_rct.height)
+    scrn_sfc.blit(bomb_sfc, bomb_rct) 
+    vx, vy = +1, +1
+    return bomb_rct,bomb_sfc,vx,vy
+
 #ゲーム自体を関数化
 def nigerokouka():
     clock =pg.time.Clock()
@@ -32,6 +44,9 @@ def nigerokouka():
     # scrn_sfcにtori_rctに従って，tori_sfcを貼り付ける
     scrn_sfc.blit(tori_sfc, tori_rct) 
 
+    #爆弾生成関数を呼び出す
+    bomb_rct,bomb_sfc,vx,vy = mk_bomb(scrn_rct,scrn_sfc)
+    """
     # 練習５
     bomb_sfc = pg.Surface((20, 20)) # 正方形の空のSurface
     bomb_sfc.set_colorkey((0, 0, 0))
@@ -41,7 +56,7 @@ def nigerokouka():
     bomb_rct.centery = random.randint(0, scrn_rct.height)
     scrn_sfc.blit(bomb_sfc, bomb_rct) 
     vx, vy = +1, +1
-
+    """
     
     # 練習２
     while True:
@@ -50,7 +65,6 @@ def nigerokouka():
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
-
         # 練習4
         key_dct = pg.key.get_pressed() # 辞書型
         if key_dct[pg.K_UP]:
