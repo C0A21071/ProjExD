@@ -14,6 +14,7 @@ def check_bound(obj_rct,scrn_rct):
     return yoko,tate
 
 def main():
+    count = 0
     clock =pg.time.Clock()
 
     pg.display.set_caption("逃げろ！こうかとん")
@@ -83,9 +84,14 @@ def main():
         vx *= yoko
         vy *= tate
 
+        count = 0#こうかとんが爆弾にあたった回数
         if tori_rct.colliderect(bomb_rct):
-            #return
-            tori_sfc = pg.image.load("fig/9.png")
+            tori_sfc = pg.image.load("fig/8.png")
+            tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 2.0)
+            count += 1
+            print(count)
+            if count == 3:
+                return
         scrn_sfc.blit(bomb_sfc, bomb_rct)
         pg.display.update()
         clock.tick(1000)
