@@ -14,7 +14,7 @@ def check_bound(obj_rct,scrn_rct):
     return yoko,tate
 
 def main():
-    count = 0
+    count = 3#こうかとんが爆弾にあたった回数
     clock =pg.time.Clock()
 
     pg.display.set_caption("逃げろ！こうかとん")
@@ -37,9 +37,10 @@ def main():
     bomb_rct.centerx = random.randint(0,scrn_rct.width)
     bomb_rct.centery = random.randint(0,scrn_rct.height)
     scrn_sfc.blit(bomb_sfc, bomb_rct)
-
     
     vx,vy = +1,+1
+
+    flag = False
 
     while True:
         scrn_sfc.blit(pgbg_sfc, pgbg_rct) 
@@ -84,15 +85,21 @@ def main():
         vx *= yoko
         vy *= tate
 
-        count = 0#こうかとんが爆弾にあたった回数
-        if tori_rct.colliderect(bomb_rct):
-            tori_sfc = pg.image.load("fig/8.png")
+        #爆弾に当たったらcount-=1をする
+        if tori_rct.colliderect(bomb_rct) and not flag:
+            flag = True
+            tori_sfc = pg.image.load("fig/8.png")#爆弾に当たったらこうかとんの画像を変更する
             tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 2.0)
-            count += 1
+            count -= 1
             print(count)
-            if count == 3:
-                return
+        
+        elif not tori_rct.colliderect(bomb_rct):
+            flag = False 
+    
+        if count == 0:#爆弾に3回当たったらゲームを終了する
+            return
         scrn_sfc.blit(bomb_sfc, bomb_rct)
+        
         pg.display.update()
         clock.tick(1000)
         
