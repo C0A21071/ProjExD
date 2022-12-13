@@ -56,6 +56,9 @@ def nigerokouka():
     vx, vy = +1, +1
     dx, dy = +1, +1
     
+    #ゲーム開始時に待機時間を設ける
+    pg.time.wait(1000)
+
     # 練習２
     while True:
         scrn_sfc.blit(pgbg_sfc, pgbg_rct) 
@@ -108,7 +111,7 @@ def nigerokouka():
             return
 
         pg.display.update()
-        clock.tick(1000)
+        clock.tick(1000000)
 
 #スタート画面生成用関数を呼び出す
 def makestart():
