@@ -6,6 +6,7 @@ def main():
     scrn_sfc = pg.display.set_mode((1600,900)) #800x600の画面surfaceを生成
 
     pgbg_sfc = pg.image.load("fig/pg_bg.jpg")
+    
 
 
 if __name__ == "__main__":
