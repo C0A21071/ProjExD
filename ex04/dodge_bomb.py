@@ -40,7 +40,7 @@ def main():
     
     vx,vy = +1,+1
 
-    flag = False
+    flag = False 
 
     while True:
         scrn_sfc.blit(pgbg_sfc, pgbg_rct) 
