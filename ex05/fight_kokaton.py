@@ -70,6 +70,27 @@ class Bomb:
         self.blit(scr)
 
 
+class Wakiyakukokaton: #敵キャラを追加する
+    def __init__(self, img_path, ratio, vxy, scr:Screen):
+
+        self.sfc = pg.image.load(img_path)
+        self.sfc = pg.transform.rotozoom(self.sfc, 0, ratio)
+        self.rct = self.sfc.get_rect()
+        self.rct.centerx = random.randint(0, scr.rct.width)
+        self.rct.centery = random.randint(0, scr.rct.height)
+        self.vx, self.vy = vxy
+
+    def blit(self, scr:Screen):
+        scr.sfc.blit(self.sfc, self.rct)
+
+    def update(self, scr:Screen):
+        self.rct.move_ip(self.vx, self.vy)
+        yoko, tate = check_bound(self.rct, scr.rct)
+        self.vx *= yoko
+        self.vy *= tate
+        self.blit(scr)
+
+
 def check_bound(obj_rct, scr_rct):
     """
     第1引数：こうかとんrectまたは爆弾rect
@@ -86,7 +107,7 @@ def check_bound(obj_rct, scr_rct):
 
 def main():
     clock =pg.time.Clock()
-    count = 2#こうかとんが爆弾にあたった回数
+    count = 3#こうかとんが爆弾にあたった回数
     flag = False
 
     # 練習１
@@ -95,6 +116,10 @@ def main():
     # 練習３
     kkt = Bird("fig/6.png", 2.0, (900,400))
     kkt.update(scr)
+
+    #敵キャラ
+    teki = Wakiyakukokaton("fig/chimp.png",3.0,(+1, +1),scr)
+    teki.update(scr)
 
     # 練習５
     bkd_lst = []
@@ -110,6 +135,9 @@ def main():
     # 練習２
     while True:        
         scr.blit()
+
+        teki.update(scr)
+
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
@@ -124,11 +152,10 @@ def main():
             elif not kkt.rct.colliderect(bkd.rct):
                 flag = False
             
-            if count == 0:#爆弾に3回当たったらゲームを終了する
-                return
-            elif count == 1:
-                tori_sfc = pg.image.load("fig/0.png")#爆弾に当たったらこうかとんの画像を変更する
-                tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 2.0)
+            
+        if kkt.rct.colliderect(teki.rct):
+            count-=1
+
 
         
         kkt.update(scr)
