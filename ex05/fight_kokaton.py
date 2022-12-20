@@ -124,8 +124,8 @@ def main():
 
     # 練習５
     bkd_lst = [] #食べられる爆弾のリスト
-    bkd_num = 20 #食べられる爆弾の数
-    for i in range(bkd_num):
+    BKD_NUM = 20 #食べられる爆弾の数
+    for i in range(BKD_NUM):
         bkd = Bomb((255, 0, 0), 10, (+1, +1), scr)
         bkd_lst.append(bkd)
 
