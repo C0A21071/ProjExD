@@ -70,7 +70,8 @@ class Bomb:
         self.vy *= tate
         self.blit(scr)
 
-class Enemy: #敵こうかとんを出現させる
+#追加クラス
+class Wakiyakukokaton: #敵こうかとんを出現させる
     def __init__(self, img_path, ratio, vxy, scr:Screen):
 
         self.sfc = pg.image.load(img_path)
@@ -89,6 +90,8 @@ class Enemy: #敵こうかとんを出現させる
         self.vx *= yoko
         self.vy *= tate
         self.blit(scr)
+
+
 
 
 def check_bound(obj_rct, scr_rct):
@@ -112,30 +115,27 @@ def main():
     scr = Screen("逃げろ！こうかとん", (1600,900), "fig/pg_bg.jpg")
 
     # 練習３
-    kkt = Bird("fig/6.png", 2.0, (900,400)) #2こめを2から4に変えちゃった
+    kkt = Bird("fig/6.png", 1.5, (900,400)) 
     kkt.update(scr)
 
     #追加機能 敵こうかとん
-    ene = Enemy("fig/4.png",2.0,(+1, +1),scr)
+    ene = Wakiyakukokaton("fig/1.png",3.0,(+1, +1),scr)
     ene.update(scr)
 
     # 練習５
     bkd_lst = [] #食べられる爆弾のリスト
-    for i in range(5):
+    bkd_num = 20 #食べられる爆弾の数
+    for i in range(bkd_num):
         bkd = Bomb((255, 0, 0), 10, (+1, +1), scr)
         bkd_lst.append(bkd)
 
     no_eat_lst = [] #食べられない爆弾のリスト
-    for i in range(1):
-        noeatbkd = Bomb((255,255,0),15,(+1,+1),scr)
+    for i in range(2):
+        noeatbkd = Bomb((50,50,50),18,(+1,+1),scr)
         no_eat_lst.append(noeatbkd)
 
     
-    #bkd.update(scr)
 
-
-
-    
     # 練習２
     while True:        
         scr.blit()
@@ -151,12 +151,10 @@ def main():
         ene.update(scr)
 
         #食べられない爆弾の当たり判定
-        for i in range(1):
+        for i in range(2):
             no_eat_lst[i].update(scr)
             if kkt.rct.colliderect(no_eat_lst[i].rct):
                 return
-
-
 
         #食べられる爆弾に関わる処理
         for i in range(list_len):
@@ -165,16 +163,13 @@ def main():
                 #こうかとんが爆弾を食べる
                 bkd_lst.pop(i) #衝突判定を受けた爆弾をリストから削除
                 list_len -= 1 #リストの長さが１減る
-
                 if (list_len == 0):
                     return #爆弾を全て食べ終えたらゲーム終了
-
                 break #リストの長さが変わった状態でfor文が続くとエラーが起きる為ループから抜ける
 
         #敵こうかとんの接触判定            
         if kkt.rct.colliderect(ene.rct):
             return
-
 
         pg.display.update()
         clock.tick(1000)
