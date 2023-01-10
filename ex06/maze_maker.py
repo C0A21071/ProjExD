@@ -1,3 +1,5 @@
+#オレンジ色の玉を配置し、玉の数を記録する機能を実装した
+
 import random
 
 def make_maze(yoko, tate):
