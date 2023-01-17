@@ -1,38 +1,29 @@
 import random
+import datetime
 
-def main():
-    shutudai()
-    kaitou()
 
-def shutudai():
-    global mondai,seikai,mondai1
+def shutudai(qa_lst):
+    qa = random.choice(qa_lst)
+    print("問題：" + qa["q"])
+    return qa["a"]
 
-    mondai = ["サザエの旦那の名前は？","カツオの妹の名前は？","タラオはカツオから見てどんな関係？"]
-    seikai = [["マスオ","ますお"],["ワカメ","わかめ"],["甥","おい"]]
-    mondai1 = random.choice(mondai)
-    print("問題:"+mondai1)
-
-def kaitou():
-    kaitou1 = input("答えてください:")
-    if mondai1 == mondai[0]:
-        if kaitou1 == seikai[0][0:1]:
-            print("正解!!!")
-        else:
-            print("出直してこい")
-    elif mondai1 == mondai[1]:
-        if kaitou1 == seikai[1][0:1]:
-            print("正解!!!")
-        else:
-            print("出直してこい")
-    elif mondai1 == mondai[2]:
-        if kaitou1 == seikai[2][0:1]:
-            print("正解!!!")
-        else:
-            print("出直してこい")
+def kaitou(ans_lst):
+    st = datetime.datetime.now()
+    ans = input("答えるんだ：")
+    ed = datetime.datetime.now()
+    if ans in ans_lst:
+        print("正解！！！")
     else:
         print("出直してこい")
 
-if __name__ == "___main__":
+    print(f"回答時間：{(ed-st).seconds}")
+if __name__ == "__main__":
     qa_lst = [
-        {"q":"サザエの旦那の名前は？","a":["ますお","マスオ"]}
+        {"q":"サザエの旦那の名前は？","a":["マスオ","ますお"]},
+        {"q":"カツオの妹の名前は？","a":["ワカメ","わかめ"]},
+        {"q":"タラオはカツオから見てどんな関係？","a":["甥","おい","甥っ子","おいっこ"]}
     ]
+
+    ans_lst = shutudai(qa_lst)
+
+    kaitou(ans_lst)
