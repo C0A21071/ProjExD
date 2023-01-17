@@ -11,7 +11,7 @@ def key_down(event):
  #   global key
   #  key = ""
   
-
+  
 def main_proc():
     global cx, cy, mx, my, ball
 
