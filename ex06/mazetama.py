@@ -88,9 +88,25 @@ def main_proc():
     root.after(100, main_proc)
 
 
+def countdown(num): #引数numは残り時間
+    label['text'] = num #残り時間がlabelのtextになる
+    if num > 0: #残り時間が0になるまで
+        root.after(1000, countdown, num-1) #1秒ごとにcountdown関数を実行し、そのたびに時間を減らす
+
+
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("迷えるこうかとん")
+
+    #残り時間表示    
+    label = tk.Label(root,
+                    fg="red",
+                    font=("MSゴシック", "30", "normal")
+                    )
+    label.pack()
+
+    countdown(60)
+    
     canvas = tk.Canvas(root, width=1200, height=1000, bg="black")
     canvas.pack()
 
